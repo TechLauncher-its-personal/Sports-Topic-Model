@@ -1,0 +1,63 @@
+convert:
+  cmd: python -m spacy run convert
+  script:
+    - python scripts/convert.py en assets/sports_topic_training.jsonl corpus/train.spacy
+    - python scripts/convert.py en assets/sports_topic_eval.jsonl corpus/dev.spacy
+  deps:
+    - path: assets/sports_topic_training.jsonl
+      md5: a03815eb328e3b0574e5d1074d58b93d
+    - path: assets/sports_topic_eval.jsonl
+      md5: 001c5c47a0cd547801a783b46ffa0abd
+    - path: scripts/convert.py
+      md5: 81a27c7679f32363bca9cbcd12a366d7
+  outs:
+    - path: corpus/train.spacy
+      md5: f5993ed77572816c3ae91903b9a8dc5b
+    - path: corpus/dev.spacy
+      md5: 9b384c4322443e0cf11afd5d08c5e54f
+  spacy_version: 3.0.5
+  spacy_git_version: 53a3b967a
+train:
+  cmd: python -m spacy run train
+  script:
+    - python -m spacy train configs/config.cfg --output training/ --paths.train corpus/train.spacy
+      --paths.dev corpus/dev.spacy --nlp.lang en --gpu-id -1
+  deps:
+    - path: configs/config.cfg
+      md5: a816f3124515782349856290f1d7f384
+    - path: corpus/train.spacy
+      md5: f5993ed77572816c3ae91903b9a8dc5b
+    - path: corpus/dev.spacy
+      md5: 9b384c4322443e0cf11afd5d08c5e54f
+  outs:
+    - path: training/model-best
+      md5: bc96c7c223d516eca537e5a4972d5262
+  spacy_version: 3.0.5
+  spacy_git_version: 53a3b967a
+evaluate:
+  cmd: python -m spacy run evaluate
+  script:
+    - python -m spacy evaluate training/model-best corpus/dev.spacy --output training/metrics.json
+  deps:
+    - path: corpus/dev.spacy
+      md5: 9b384c4322443e0cf11afd5d08c5e54f
+    - path: training/model-best
+      md5: bc96c7c223d516eca537e5a4972d5262
+  outs:
+    - path: training/metrics.json
+      md5: 48d1f6cb1aac89ccd22b7caf3b9116c2
+  spacy_version: 3.0.5
+  spacy_git_version: 53a3b967a
+package:
+  cmd: python -m spacy run package
+  script:
+    - python -m spacy package training/model-best packages --name sports_topic_model
+      --version 0.0.0 --force
+  deps:
+    - path: training/model-best
+      md5: bc96c7c223d516eca537e5a4972d5262
+  outs:
+    - path: packages/en_sports_topic_model-0.0.0/dist/en_sports_topic_model-0.0.0.tar.gz
+      md5: 251ed8f62fbd198fa420fa394582c2e3
+  spacy_version: 3.0.5
+  spacy_git_version: 53a3b967a
