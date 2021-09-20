@@ -31,7 +31,7 @@ train:
       md5: 8ea6cd26d916fc3567b4368a17d806ef
   outs:
     - path: training/model-best
-      md5: a8711e204662da6b033e554213921393
+      md5: 93157ab1c65b87619f42e338fef10d80
   spacy_version: 3.0.5
   spacy_git_version: 53a3b967a
 evaluate:
@@ -42,10 +42,10 @@ evaluate:
     - path: corpus/dev.spacy
       md5: 8ea6cd26d916fc3567b4368a17d806ef
     - path: training/model-best
-      md5: a8711e204662da6b033e554213921393
+      md5: 93157ab1c65b87619f42e338fef10d80
   outs:
     - path: training/metrics.json
-      md5: ccee97fb39b4028d6b461675739474b3
+      md5: 2de96ddda514295f9ebdbdd87d345741
   spacy_version: 3.0.5
   spacy_git_version: 53a3b967a
 package:
@@ -55,9 +55,9 @@ package:
       --version 0.0.0 --force
   deps:
     - path: training/model-best
-      md5: a8711e204662da6b033e554213921393
+      md5: 93157ab1c65b87619f42e338fef10d80
   outs:
     - path: packages/en_sports_topic_model-0.0.0/dist/en_sports_topic_model-0.0.0.tar.gz
-      md5: dc18c3bd704025af455a314bd5a326eb
+      md5: ebe2aa57ba0c69404d5de1fbc0aef43e
   spacy_version: 3.0.5
   spacy_git_version: 53a3b967a
