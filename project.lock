@@ -5,16 +5,16 @@ convert:
     - python scripts/convert.py en assets/sports_topic_eval.jsonl corpus/dev.spacy
   deps:
     - path: assets/sports_topic_training.jsonl
-      md5: c0c789dd88dc462c21a7f7e6d0249f26
+      md5: 141a378bff7b9c6e8161d4f3abab1259
     - path: assets/sports_topic_eval.jsonl
-      md5: 0c0f97ef96b6742e4f22409e1ca792ea
+      md5: 8906f40530254fd59da9d6661235b05c
     - path: scripts/convert.py
       md5: 81a27c7679f32363bca9cbcd12a366d7
   outs:
     - path: corpus/train.spacy
-      md5: f7fb59df1b8529a85484cca87c25ba51
+      md5: e6100bd6a21e11c1b874be010b384c3b
     - path: corpus/dev.spacy
-      md5: 8ea6cd26d916fc3567b4368a17d806ef
+      md5: 3bb74ea6bf7a2907e18d3a0f0bf3dee7
   spacy_version: 3.0.5
   spacy_git_version: 53a3b967a
 train:
@@ -26,12 +26,12 @@ train:
     - path: configs/config.cfg
       md5: a816f3124515782349856290f1d7f384
     - path: corpus/train.spacy
-      md5: f7fb59df1b8529a85484cca87c25ba51
+      md5: e6100bd6a21e11c1b874be010b384c3b
     - path: corpus/dev.spacy
-      md5: 8ea6cd26d916fc3567b4368a17d806ef
+      md5: 3bb74ea6bf7a2907e18d3a0f0bf3dee7
   outs:
     - path: training/model-best
-      md5: 93157ab1c65b87619f42e338fef10d80
+      md5: 6645ed73ad4b4f9ad7c38ddbadef29db
   spacy_version: 3.0.5
   spacy_git_version: 53a3b967a
 evaluate:
@@ -40,12 +40,12 @@ evaluate:
     - python -m spacy evaluate training/model-best corpus/dev.spacy --output training/metrics.json
   deps:
     - path: corpus/dev.spacy
-      md5: 8ea6cd26d916fc3567b4368a17d806ef
+      md5: 3bb74ea6bf7a2907e18d3a0f0bf3dee7
     - path: training/model-best
-      md5: 93157ab1c65b87619f42e338fef10d80
+      md5: 6645ed73ad4b4f9ad7c38ddbadef29db
   outs:
     - path: training/metrics.json
-      md5: 2de96ddda514295f9ebdbdd87d345741
+      md5: 2250806cfa6a508722b7580a8ecf9bd2
   spacy_version: 3.0.5
   spacy_git_version: 53a3b967a
 package:
