@@ -55,9 +55,9 @@ package:
       --version 0.0.0 --force
   deps:
     - path: training/model-best
-      md5: 93157ab1c65b87619f42e338fef10d80
+      md5: 6645ed73ad4b4f9ad7c38ddbadef29db
   outs:
     - path: packages/en_sports_topic_model-0.0.0/dist/en_sports_topic_model-0.0.0.tar.gz
-      md5: ebe2aa57ba0c69404d5de1fbc0aef43e
+      md5: f671f543164d148e0ded58f4171dc5de
   spacy_version: 3.0.5
   spacy_git_version: 53a3b967a
